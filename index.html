@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sodeep - Công nghệ tiên tiến cho nội dung sâu lắng</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header with Logo -->
+        <header class="header">
+            <div class="logo-container">
+                <svg class="logo" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Background circle for depth -->
+                    <circle cx="30" cy="30" r="25" fill="url(#gradient1)" opacity="0.8"/>
+                    <circle cx="30" cy="30" r="20" fill="url(#gradient2)" opacity="0.6"/>
+                    <circle cx="30" cy="30" r="15" fill="url(#gradient3)" opacity="0.4"/>
+                    
+                    <!-- Text -->
+                    <text x="70" y="25" font-family="'Arial', sans-serif" font-size="20" font-weight="bold" fill="#2c3e50">So</text>
+                    <text x="70" y="45" font-family="'Arial', sans-serif" font-size="20" font-weight="300" fill="#34495e">deep</text>
+                    
+                    <!-- Gradients -->
+                    <defs>
+                        <radialGradient id="gradient1" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" style="stop-color:#3498db;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#2980b9;stop-opacity:1" />
+                        </radialGradient>
+                        <radialGradient id="gradient2" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" style="stop-color:#5dade2;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#3498db;stop-opacity:1" />
+                        </radialGradient>
+                        <radialGradient id="gradient3" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" style="stop-color:#85c1e9;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#5dade2;stop-opacity:1" />
+                        </radialGradient>
+                    </defs>
+                </svg>
+            </div>
+            <p class="tagline">Hệ thống thông minh cho nội dung sâu lắng</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- API Key Section -->
+            <section class="api-section">
+                <h2>Cấu hình dịch vụ</h2>
+                <div class="api-key-container">
+                    <label for="apiKey" class="api-label">Khóa dịch vụ của bạn:</label>
+                    <div class="input-group">
+                        <input 
+                            type="password" 
+                            id="apiKey" 
+                            class="api-input" 
+                            placeholder="Nhập khóa dịch vụ để sử dụng công cụ tạo nội dung"
+                        >
+                        <button type="button" id="toggleKey" class="toggle-btn" title="Hiện/Ẩn khóa">
+                            👁️
+                        </button>
+                    </div>
+                    <div class="api-actions">
+                        <button id="saveKey" class="btn btn-primary">Lưu khóa</button>
+                        <button id="clearKey" class="btn btn-secondary">Xóa khóa</button>
+                    </div>
+                    <div id="apiStatus" class="status-message"></div>
+                    <div class="help-text">
+                        <p><strong>Hướng dẫn:</strong> Để sử dụng dịch vụ tạo nội dung, bạn cần có khóa dịch vụ hợp lệ. Khóa sẽ được lưu trữ an toàn trên thiết bị của bạn.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Content Generation Section -->
+            <section class="content-section">
+                <h2>Tạo ra nội dung sâu lắng</h2>
+                <div class="content-form">
+                    <label for="prompt" class="form-label">Mô tả nội dung bạn muốn tạo ra:</label>
+                    <textarea 
+                        id="prompt" 
+                        class="prompt-input" 
+                        placeholder="Hãy mô tả nội dung bạn muốn công cụ tạo ra cho bạn..."
+                        rows="4"
+                    ></textarea>
+                    <div class="form-actions">
+                        <button id="generateBtn" class="btn btn-generate">Tạo ra nội dung</button>
+                        <button id="clearBtn" class="btn btn-secondary">Xóa nội dung</button>
+                    </div>
+                </div>
+                
+                <div id="result" class="result-container" style="display: none;">
+                    <h3>Kết quả:</h3>
+                    <div id="resultContent" class="result-content"></div>
+                    <button id="copyResult" class="btn btn-copy">Sao chép kết quả</button>
+                </div>
+                
+                <div id="loading" class="loading" style="display: none;">
+                    <div class="loader"></div>
+                    <p>Đang tạo ra nội dung...</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 Sodeep - Công nghệ tiên tiến cho nội dung chất lượng</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
