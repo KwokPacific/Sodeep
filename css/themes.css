@@ -1,0 +1,252 @@
+/* ========================================
+   Dark Theme
+   ======================================== */
+[data-theme="dark"] {
+  /* Colors - Dark Theme */
+  --color-primary: #818cf8;
+  --color-primary-dark: #6366f1;
+  --color-primary-light: #c7d2fe;
+  
+  --color-secondary: #f472b6;
+  --color-secondary-dark: #ec4899;
+  --color-secondary-light: #fbcfe8;
+  
+  --color-success: #34d399;
+  --color-warning: #fbbf24;
+  --color-error: #f87171;
+  
+  --color-text-primary: #f9fafb;
+  --color-text-secondary: #d1d5db;
+  --color-text-muted: #9ca3af;
+  
+  --color-bg-primary: #111827;
+  --color-bg-secondary: #1f2937;
+  --color-bg-tertiary: #374151;
+  
+  --color-border: #374151;
+  --color-border-light: #4b5563;
+  
+  /* Dark Theme Gradients */
+  --gradient-primary: linear-gradient(135deg, #818cf8 0%, #f472b6 100%);
+  --gradient-secondary: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+  --gradient-card: linear-gradient(135deg, rgba(31, 41, 55, 0.9) 0%, rgba(17, 24, 39, 0.7) 100%);
+  
+  /* Dark Theme Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+}
+
+/* ========================================
+   Dark Theme Body Background
+   ======================================== */
+[data-theme="dark"] body {
+  background: var(--color-bg-secondary);
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(129, 140, 248, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(244, 114, 182, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(99, 102, 241, 0.1) 0%, transparent 50%);
+}
+
+/* ========================================
+   Dark Theme Form Components
+   ======================================== */
+[data-theme="dark"] .form-select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23d1d5db' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+}
+
+/* ========================================
+   Dark Theme Loading States
+   ======================================== */
+[data-theme="dark"] .loading::before {
+  background: rgba(31, 41, 55, 0.9);
+}
+
+/* ========================================
+   Dark Theme Scrollbars
+   ======================================== */
+[data-theme="dark"] ::-webkit-scrollbar {
+  width: 8px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-sm);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--color-border-light);
+  border-radius: var(--radius-sm);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-light);
+}
+
+/* ========================================
+   Light Theme Scrollbars
+   ======================================== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-sm);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-light);
+}
+
+/* ========================================
+   Theme Transition Animations
+   ======================================== */
+html,
+body,
+.header,
+.generator__card,
+.quote,
+.modal__content,
+.footer,
+.toast {
+  transition: 
+    background-color var(--transition-normal),
+    background-image var(--transition-normal),
+    border-color var(--transition-normal),
+    color var(--transition-normal),
+    box-shadow var(--transition-normal);
+}
+
+/* ========================================
+   Dark Theme Specific Adjustments
+   ======================================== */
+[data-theme="dark"] .quote__text::before,
+[data-theme="dark"] .quote__text::after {
+  color: var(--color-primary-light);
+}
+
+[data-theme="dark"] .header {
+  border-bottom-color: var(--color-border);
+  background: rgba(17, 24, 39, 0.9);
+}
+
+[data-theme="dark"] .footer {
+  border-top-color: var(--color-border);
+}
+
+/* ========================================
+   Theme Toggle Icon Animation
+   ======================================== */
+.theme-toggle i {
+  transition: transform var(--transition-fast);
+}
+
+[data-theme="dark"] .theme-toggle i::before {
+  content: "\f185"; /* fa-sun */
+}
+
+.theme-toggle:hover i {
+  transform: rotate(180deg);
+}
+
+/* ========================================
+   High Contrast Dark Theme
+   ======================================== */
+@media (prefers-contrast: high) {
+  [data-theme="dark"] {
+    --color-border: #ffffff;
+    --color-text-secondary: #ffffff;
+    --color-bg-primary: #000000;
+    --color-bg-secondary: #000000;
+    --color-bg-tertiary: #333333;
+  }
+}
+
+/* ========================================
+   System Theme Preference
+   ======================================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Auto dark mode variables can be added here if needed */
+  }
+}
+
+/* ========================================
+   Theme Transition Smooth Loading
+   ======================================== */
+.theme-loading * {
+  transition: none !important;
+}
+
+/* Remove theme-loading class after a short delay to enable smooth transitions */
+.theme-loaded {
+  transition: all var(--transition-normal);
+}
+
+/* ========================================
+   Custom Theme Variations (Optional)
+   ======================================== */
+
+/* Sunset Theme */
+[data-theme="sunset"] {
+  --color-primary: #f97316;
+  --color-secondary: #ec4899;
+  --gradient-primary: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
+  --color-bg-secondary: #fef3c7;
+  --color-bg-primary: #fefbf0;
+}
+
+/* Ocean Theme */
+[data-theme="ocean"] {
+  --color-primary: #0ea5e9;
+  --color-secondary: #06b6d4;
+  --gradient-primary: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+  --color-bg-secondary: #e0f2fe;
+  --color-bg-primary: #f0f9ff;
+}
+
+/* Forest Theme */
+[data-theme="forest"] {
+  --color-primary: #059669;
+  --color-secondary: #10b981;
+  --gradient-primary: linear-gradient(135deg, #059669 0%, #10b981 100%);
+  --color-bg-secondary: #ecfdf5;
+  --color-bg-primary: #f0fdf4;
+}
+
+/* ========================================
+   Print Styles
+   ======================================== */
+@media print {
+  [data-theme="dark"] {
+    --color-text-primary: #000000;
+    --color-text-secondary: #333333;
+    --color-bg-primary: #ffffff;
+    --color-bg-secondary: #ffffff;
+    --color-border: #cccccc;
+  }
+  
+  .header__controls,
+  .results__actions,
+  .quote__copy,
+  .btn {
+    display: none !important;
+  }
+  
+  .quote {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #cccccc;
+  }
+  
+  .modal {
+    display: none !important;
+  }
+}

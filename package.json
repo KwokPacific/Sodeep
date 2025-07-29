@@ -1,0 +1,30 @@
+{
+  "name": "sodeep",
+  "version": "1.0.0",
+  "description": "Web App Sodeep - Tạo Câu Nói Hay và Sâu Lắng",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve .",
+    "dev": "live-server .",
+    "build": "echo 'Static files ready for deployment'"
+  },
+  "keywords": [
+    "quotes",
+    "vietnamese",
+    "gemini",
+    "ai",
+    "deep-thoughts",
+    "wisdom"
+  ],
+  "author": "Thái Bình Dương",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2",
+    "serve": "^14.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KwokPacific/Sodeep.git"
+  },
+  "homepage": "https://github.com/KwokPacific/Sodeep#readme"
+}

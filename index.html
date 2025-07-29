@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sodeep - Tạo Câu Nói Hay và Sâu Lắng</title>
+    <meta name="description" content="Tạo những câu nói hay, sâu lắng với AI Gemini Pro 2.5">
+    <meta name="keywords" content="câu nói hay, sâu lắng, triết lý, tình yêu, cuộc sống">
+    <meta name="author" content="Thái Bình Dương">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/themes.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header__content">
+                <div class="header__logo">
+                    <img src="assets/images/logo.png" alt="Sodeep" class="header__logo-img">
+                    <h1 class="header__title">Sodeep</h1>
+                </div>
+                <div class="header__controls">
+                    <button class="theme-toggle" id="themeToggle" aria-label="Chuyển đổi chế độ">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero">
+                <h2 class="hero__title">Tạo Câu Nói Hay và Sâu Lắng</h2>
+                <p class="hero__subtitle">Khám phá những suy tư sâu sắc qua AI Gemini Pro 2.5</p>
+            </section>
+
+            <!-- Generator Form -->
+            <section class="generator">
+                <div class="generator__card">
+                    <form class="generator__form" id="quoteForm">
+                        <div class="form-group">
+                            <label for="style" class="form-label">
+                                <i class="fas fa-pen-fancy"></i>
+                                Văn phong
+                            </label>
+                            <select id="style" class="form-select" required>
+                                <option value="">Chọn văn phong...</option>
+                                <option value="sâu lắng">Sâu lắng</option>
+                                <option value="lãng mạn">Lãng mạn</option>
+                                <option value="đời">Đời</option>
+                                <option value="triết lý">Triết lý</option>
+                                <option value="truyền cảm hứng">Truyền cảm hứng</option>
+                                <option value="thơ mộng">Thơ mộng</option>
+                                <option value="châm biếm">Châm biếm</option>
+                                <option value="hài hước">Hài hước</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="topic" class="form-label">
+                                <i class="fas fa-heart"></i>
+                                Chủ đề
+                            </label>
+                            <select id="topic" class="form-select" required>
+                                <option value="">Chọn chủ đề...</option>
+                                <option value="tình yêu">Tình yêu</option>
+                                <option value="cuộc sống">Cuộc sống</option>
+                                <option value="tình bạn">Tình bạn</option>
+                                <option value="gia đình">Gia đình</option>
+                                <option value="sự nghiệp">Sự nghiệp</option>
+                                <option value="thành công">Thành công</option>
+                                <option value="khó khăn">Khó khăn</option>
+                                <option value="hạnh phúc">Hạnh phúc</option>
+                                <option value="tuổi trẻ">Tuổi trẻ</option>
+                                <option value="thời gian">Thời gian</option>
+                                <option value="hy vọng">Hy vọng</option>
+                                <option value="ước mơ">Ước mơ</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn--primary" id="generateBtn">
+                            <i class="fas fa-magic"></i>
+                            <span class="btn__text">Tạo câu nói</span>
+                            <div class="btn__spinner" style="display: none;">
+                                <i class="fas fa-spinner fa-spin"></i>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results" id="resultsSection" style="display: none;">
+                <div class="results__header">
+                    <h3 class="results__title">Câu nói của bạn</h3>
+                    <div class="results__actions">
+                        <button class="btn btn--secondary" id="historyBtn">
+                            <i class="fas fa-history"></i>
+                            Lịch sử
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="quotes" id="quotesContainer">
+                    <!-- Quotes will be inserted here -->
+                </div>
+            </section>
+
+            <!-- History Modal -->
+            <div class="modal" id="historyModal">
+                <div class="modal__overlay" id="modalOverlay"></div>
+                <div class="modal__content">
+                    <div class="modal__header">
+                        <h3 class="modal__title">Lịch sử câu nói</h3>
+                        <button class="modal__close" id="modalClose">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="modal__body" id="historyContent">
+                        <!-- History content will be inserted here -->
+                    </div>
+                    <div class="modal__footer">
+                        <button class="btn btn--secondary" id="clearHistoryBtn">
+                            <i class="fas fa-trash"></i>
+                            Xóa lịch sử
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__info">
+                    <p class="footer__text">
+                        Được tạo bởi <strong>Thái Bình Dương</strong>
+                    </p>
+                    <p class="footer__text">
+                        Sử dụng AI Gemini Pro 2.5 để tạo những câu nói sâu lắng
+                    </p>
+                </div>
+                <div class="footer__links">
+                    <a href="https://github.com/KwokPacific/Sodeep" target="_blank" class="footer__link">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notifications -->
+    <div class="toast" id="toast">
+        <div class="toast__content">
+            <i class="toast__icon fas fa-check-circle"></i>
+            <span class="toast__message"></span>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/utils.js"></script>
+    <script src="js/gemini-api.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

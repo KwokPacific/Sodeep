@@ -1,0 +1,15 @@
+This is a placeholder for the logo.png file.
+
+To create a proper logo, you can:
+1. Design a logo using tools like Figma, Canva, or Adobe Illustrator
+2. Use an AI logo generator
+3. Create a simple text-based logo using CSS
+
+Recommended specifications:
+- Size: 40x40 pixels (minimum), scalable
+- Format: PNG with transparency
+- Style: Modern, clean, represents depth/wisdom
+- Colors: Should work with both light and dark themes
+
+For now, the application will work without the logo image.
+The header will show just the text "Sodeep" if the image is missing.
