@@ -70,30 +70,44 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="accessCode" class="input-label">
-                            <span class="label-text">🔑 Mã truy cập dịch vụ</span>
-                            <span class="label-description">Nhập mã truy cập để sử dụng dịch vụ tạo nội dung</span>
-                        </label>
-                        <div class="input-container">
-                            <input 
-                                type="password" 
-                                id="accessCode" 
-                                class="text-input" 
-                                placeholder="Nhập mã truy cập dịch vụ..."
-                            >
-                            <div class="input-actions">
-                                <button type="button" id="saveAccessCode" class="save-btn">
-                                    <span>💾</span> Lưu mã
-                                </button>
-                                <button type="button" id="toggleAccessCode" class="toggle-btn">
-                                    <span id="toggleIcon">👁️</span>
-                                </button>
+                    <!-- API Notice -->
+                    <div class="api-notice">
+                        <span class="notice-icon">✅</span>
+                        <span>Ứng dụng đã được cấu hình sẵn API key miễn phí - sử dụng ngay!</span>
+                    </div>
+
+                    <!-- Toggle button -->
+                    <button type="button" id="toggleApiSection" class="toggle-api-btn">
+                        <span>🔧</span> Sử dụng API key tùy chỉnh
+                    </button>
+
+                    <!-- API Section (hidden by default) -->
+                    <div class="api-section" style="display: none;">
+                        <div class="form-group">
+                            <label for="accessCode" class="input-label">
+                                <span class="label-text">🔑 API Key tùy chỉnh (tùy chọn)</span>
+                                <span class="label-description">Nhập API key riêng nếu muốn sử dụng quota riêng</span>
+                            </label>
+                            <div class="input-container">
+                                <input 
+                                    type="password" 
+                                    id="accessCode" 
+                                    class="text-input" 
+                                    placeholder="Mã API key tùy chỉnh (tùy chọn)..."
+                                >
+                                <div class="input-actions">
+                                    <button type="button" id="saveAccessCode" class="save-btn">
+                                        <span>💾</span> Lưu mã
+                                    </button>
+                                    <button type="button" id="toggleAccessCode" class="toggle-btn">
+                                        <span id="toggleIcon">👁️</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <button type="button" id="generateBtn" class="generate-btn" disabled>
+                    <button type="button" id="generateBtn" class="generate-btn">
                         <span class="btn-icon">✨</span>
                         <span class="btn-text">Tạo Quote Ngay</span>
                         <div class="btn-loading">

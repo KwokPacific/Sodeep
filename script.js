@@ -5,6 +5,7 @@
 
 class SodeepQuoteGenerator {
     constructor() {
+        this.DEFAULT_API_KEY = "AIzaSyDSVRTEEx5oFNBTxvA44_E9NpgMFp0G7sU";
         this.apiEndpoint = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
         this.accessCode = '';
         this.isGenerating = false;
@@ -32,7 +33,9 @@ class SodeepQuoteGenerator {
             toggleAccessCode: document.getElementById('toggleAccessCode'),
             toggleIcon: document.getElementById('toggleIcon'),
             charCount: document.getElementById('charCount'),
-            toast: document.getElementById('toast')
+            toast: document.getElementById('toast'),
+            toggleApiSection: document.getElementById('toggleApiSection'),
+            apiSection: document.querySelector('.api-section')
         };
     }
 
@@ -44,6 +47,9 @@ class SodeepQuoteGenerator {
         if (savedAccessCode) {
             this.accessCode = savedAccessCode;
             this.elements.accessCode.value = savedAccessCode;
+        } else {
+            // Sử dụng API key mặc định nếu không có saved key
+            this.accessCode = this.DEFAULT_API_KEY;
         }
 
         const savedInput = localStorage.getItem('sodeep_last_input');
@@ -96,6 +102,11 @@ class SodeepQuoteGenerator {
             this.toggleAccessCodeVisibility();
         });
 
+        // Toggle API section
+        this.elements.toggleApiSection.addEventListener('click', () => {
+            this.toggleApiSection();
+        });
+
         // Xử lý phím tắt
         document.addEventListener('keydown', (e) => {
             if (e.ctrlKey || e.metaKey) {
@@ -138,9 +149,10 @@ class SodeepQuoteGenerator {
      */
     checkFormValidity() {
         const hasInput = this.elements.userInput.value.trim().length > 0;
-        const hasAccessCode = this.elements.accessCode.value.trim().length > 0;
+        // API key không còn bắt buộc vì có default key
+        const hasApiKey = this.accessCode || this.elements.accessCode.value.trim().length > 0;
         
-        this.elements.generateBtn.disabled = !(hasInput && hasAccessCode) || this.isGenerating;
+        this.elements.generateBtn.disabled = !hasInput || this.isGenerating;
     }
 
     /**
@@ -181,23 +193,44 @@ class SodeepQuoteGenerator {
     }
 
     /**
+     * Chuyển đổi hiển thị section API key tùy chỉnh
+     */
+    toggleApiSection() {
+        const apiSection = this.elements.apiSection;
+        const toggleBtn = this.elements.toggleApiSection;
+        
+        if (!apiSection || !toggleBtn) return;
+        
+        const isVisible = apiSection.style.display !== 'none';
+        
+        if (isVisible) {
+            apiSection.style.display = 'none';
+            toggleBtn.innerHTML = '<span>🔧</span> Sử dụng API key tùy chỉnh';
+        } else {
+            apiSection.style.display = 'block';
+            toggleBtn.innerHTML = '<span>🔧</span> Ẩn API key tùy chỉnh';
+        }
+    }
+
+    /**
      * Tạo quote từ input của người dùng
      */
     async generateQuote() {
         if (this.isGenerating) return;
 
         const userInput = this.elements.userInput.value.trim();
-        const accessCode = this.elements.accessCode.value.trim();
-
-        if (!userInput || !accessCode) {
-            this.showToast('Vui lòng điền đầy đủ thông tin', 'error');
+        if (!userInput) {
+            this.showToast('Vui lòng nhập ý tưởng của bạn', 'error');
             return;
         }
+
+        // Sử dụng API key tùy chỉnh nếu có, ngược lại dùng default
+        const apiKey = this.elements.accessCode.value.trim() || this.accessCode;
 
         this.setLoadingState(true);
 
         try {
-            const quote = await this.callGenerativeService(userInput, accessCode);
+            const quote = await this.callGenerativeService(userInput, apiKey);
             this.displayQuote(quote);
             this.showToast('Đã tạo ra quote thành công!', 'success');
         } catch (error) {
