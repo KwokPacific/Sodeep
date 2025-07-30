@@ -5,6 +5,7 @@
 
 class SodeepQuoteGenerator {
     constructor() {
+        this.DEFAULT_API_KEY = "AIzaSyDSVRTEEx5oFNBTxvA44_E9NpgMFp0G7sU";
         this.apiEndpoint = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
         this.accessCode = '';
         this.isGenerating = false;
@@ -32,7 +33,9 @@ class SodeepQuoteGenerator {
             toggleAccessCode: document.getElementById('toggleAccessCode'),
             toggleIcon: document.getElementById('toggleIcon'),
             charCount: document.getElementById('charCount'),
-            toast: document.getElementById('toast')
+            toast: document.getElementById('toast'),
+            toggleApiSection: document.getElementById('toggleApiSection'),
+            apiSection: document.querySelector('.api-section')
         };
     }
 
@@ -40,9 +43,10 @@ class SodeepQuoteGenerator {
      * Tải cài đặt đã lưu từ localStorage
      */
     loadSavedSettings() {
-        const savedAccessCode = localStorage.getItem('sodeep_access_code');
+        const savedAccessCode = this.loadSavedAccessCode();
+        this.accessCode = savedAccessCode || this.DEFAULT_API_KEY;
+        
         if (savedAccessCode) {
-            this.accessCode = savedAccessCode;
             this.elements.accessCode.value = savedAccessCode;
         }
 
@@ -51,6 +55,13 @@ class SodeepQuoteGenerator {
             this.elements.userInput.value = savedInput;
             this.updateCharCount();
         }
+    }
+
+    /**
+     * Tải access code đã lưu từ localStorage
+     */
+    loadSavedAccessCode() {
+        return localStorage.getItem('sodeep_access_code');
     }
 
     /**
@@ -96,6 +107,13 @@ class SodeepQuoteGenerator {
             this.toggleAccessCodeVisibility();
         });
 
+        // Toggle API section
+        if (this.elements.toggleApiSection) {
+            this.elements.toggleApiSection.addEventListener('click', () => {
+                this.toggleApiSection();
+            });
+        }
+
         // Xử lý phím tắt
         document.addEventListener('keydown', (e) => {
             if (e.ctrlKey || e.metaKey) {
@@ -138,7 +156,7 @@ class SodeepQuoteGenerator {
      */
     checkFormValidity() {
         const hasInput = this.elements.userInput.value.trim().length > 0;
-        const hasAccessCode = this.elements.accessCode.value.trim().length > 0;
+        const hasAccessCode = this.elements.accessCode.value.trim().length > 0 || this.accessCode === this.DEFAULT_API_KEY;
         
         this.elements.generateBtn.disabled = !(hasInput && hasAccessCode) || this.isGenerating;
     }
@@ -165,6 +183,24 @@ class SodeepQuoteGenerator {
     }
 
     /**
+     * Chuyển đổi hiển thị section API
+     */
+    toggleApiSection() {
+        if (!this.elements.apiSection) return;
+        
+        const isVisible = this.elements.apiSection.style.display !== 'none';
+        const button = this.elements.toggleApiSection;
+        
+        if (isVisible) {
+            this.elements.apiSection.style.display = 'none';
+            button.innerHTML = '<span>🔧</span> Sử dụng API key tùy chỉnh';
+        } else {
+            this.elements.apiSection.style.display = 'block';
+            button.innerHTML = '<span>🔧</span> Ẩn API key tùy chỉnh';
+        }
+    }
+
+    /**
      * Chuyển đổi hiển thị mã truy cập
      */
     toggleAccessCodeVisibility() {
@@ -187,10 +223,11 @@ class SodeepQuoteGenerator {
         if (this.isGenerating) return;
 
         const userInput = this.elements.userInput.value.trim();
-        const accessCode = this.elements.accessCode.value.trim();
+        const customAccessCode = this.elements.accessCode.value.trim();
+        const accessCode = customAccessCode || this.accessCode;
 
-        if (!userInput || !accessCode) {
-            this.showToast('Vui lòng điền đầy đủ thông tin', 'error');
+        if (!userInput) {
+            this.showToast('Vui lòng nhập ý tưởng của bạn', 'error');
             return;
         }
 
