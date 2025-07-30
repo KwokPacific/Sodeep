@@ -3,79 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Thái Bình Dương">
     <title>Sodeep - Công cụ tạo ra những câu quote đặc biệt</title>
     <meta name="description" content="Sodeep giúp bạn tạo ra những câu quote ý nghĩa và sâu sắc từ ý tưởng của bạn">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <!-- Header với logo -->
         <header class="header">
-            <div class="logo">
-                <svg viewBox="0 0 200 60" class="logo-svg">
-                    <defs>
-                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                    <text x="10" y="40" font-family="Inter, sans-serif" font-size="32" font-weight="700" fill="url(#logoGradient)">Sodeep</text>
-                    <circle cx="170" cy="30" r="8" fill="url(#logoGradient)" opacity="0.6">
-                        <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
-                    </circle>
-                </svg>
+            <div class="logo-section">
+                <div class="logo">
+                    <svg viewBox="0 0 200 60" class="logo-svg">
+                        <defs>
+                            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#8b5cf6;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <text x="10" y="40" font-family="Playfair Display, serif" font-size="32" font-weight="700" fill="url(#logoGradient)">Sodeep</text>
+                        <circle cx="170" cy="30" r="8" fill="url(#logoGradient)" opacity="0.6">
+                            <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+                        </circle>
+                    </svg>
+                </div>
+                <div class="author-badge">
+                    <span class="badge-icon">✨</span>
+                    <span class="badge-text">Thái Bình Dương</span>
+                </div>
             </div>
-            <p class="tagline">Tạo ra những câu quote đầy cảm hứng từ suy nghĩ của bạn</p>
+            <div class="main-tagline">Tạo ra những câu quote đầy cảm hứng</div>
+            <div class="sub-tagline">từ suy nghĩ của bạn</div>
         </header>
 
         <!-- Main content -->
         <main class="main-content">
             <div class="quote-generator">
+                <div class="generator-header">
+                    <span class="header-icon">🎨</span>
+                    <h2>Tạo Quote Cá Nhân</h2>
+                    <p>Biến ý tưởng của bạn thành những câu quote đầy cảm hứng</p>
+                </div>
+                
                 <div class="input-section">
                     <div class="form-group">
                         <label for="userInput" class="input-label">
-                            <span class="label-text">Nhập ý tưởng của bạn</span>
+                            <span class="label-text">🎯 Nhập ý tưởng của bạn</span>
                             <span class="label-description">Mô tả ngắn gọn về chủ đề hoặc cảm xúc bạn muốn thể hiện</span>
                         </label>
-                        <textarea 
-                            id="userInput" 
-                            class="text-input" 
-                            placeholder="Ví dụ: Về sự kiên trì trong cuộc sống, vượt qua khó khăn..."
-                            rows="4"
-                            maxlength="500"
-                        ></textarea>
-                        <div class="char-counter">
-                            <span id="charCount">0</span>/500
+                        <div class="input-container">
+                            <textarea 
+                                id="userInput" 
+                                class="text-input" 
+                                placeholder="Ví dụ: Về sự kiên trì trong cuộc sống, vượt qua khó khăn..."
+                                rows="4"
+                                maxlength="500"
+                            ></textarea>
+                            <div class="char-counter">
+                                <span id="charCount">0</span>/500 ký tự
+                            </div>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="accessCode" class="input-label">
-                            <span class="label-text">Mã truy cập dịch vụ</span>
+                            <span class="label-text">🔑 Mã truy cập dịch vụ</span>
                             <span class="label-description">Nhập mã truy cập để sử dụng dịch vụ tạo nội dung</span>
                         </label>
-                        <input 
-                            type="password" 
-                            id="accessCode" 
-                            class="text-input" 
-                            placeholder="Nhập mã truy cập dịch vụ..."
-                        >
-                        <div class="input-actions">
-                            <button type="button" id="saveAccessCode" class="save-btn">
-                                <span>💾</span> Lưu mã
-                            </button>
-                            <button type="button" id="toggleAccessCode" class="toggle-btn">
-                                <span id="toggleIcon">👁️</span>
-                            </button>
+                        <div class="input-container">
+                            <input 
+                                type="password" 
+                                id="accessCode" 
+                                class="text-input" 
+                                placeholder="Nhập mã truy cập dịch vụ..."
+                            >
+                            <div class="input-actions">
+                                <button type="button" id="saveAccessCode" class="save-btn">
+                                    <span>💾</span> Lưu mã
+                                </button>
+                                <button type="button" id="toggleAccessCode" class="toggle-btn">
+                                    <span id="toggleIcon">👁️</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
 
                     <button type="button" id="generateBtn" class="generate-btn" disabled>
                         <span class="btn-icon">✨</span>
-                        <span class="btn-text">Tạo ra quote</span>
+                        <span class="btn-text">Tạo Quote Ngay</span>
                         <div class="btn-loading">
                             <div class="loading-spinner"></div>
                             <span>Đang tạo...</span>
@@ -90,21 +110,74 @@
                             <button type="button" id="copyBtn" class="action-btn">
                                 <span>📋</span> Sao chép
                             </button>
+                            <button type="button" id="shareBtn" class="action-btn">
+                                <span>📤</span> Chia sẻ
+                            </button>
                             <button type="button" id="regenerateBtn" class="action-btn">
                                 <span>🔄</span> Tạo lại
                             </button>
                         </div>
                     </div>
-                    <div class="quote-output" id="quoteOutput">
-                        <!-- Quote sẽ được hiển thị ở đây -->
+                    <div class="quote-container">
+                        <div class="quote-output" id="quoteOutput">
+                            <!-- Quote sẽ được hiển thị ở đây -->
+                        </div>
+                        <div class="quote-footer">
+                            <div class="quote-signature">- Sodeep by Thái Bình Dương</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </main>
 
+        <!-- Features section -->
+        <section class="features-section">
+            <h2 class="features-title">Tính năng nổi bật</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3 class="feature-title">AI Thông Minh</h3>
+                    <p class="feature-description">Sử dụng trí tuệ nhân tạo tiên tiến để tạo ra những câu quote chất lượng cao và có ý nghĩa sâu sắc.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3 class="feature-title">Cá Nhân Hóa</h3>
+                    <p class="feature-description">Mỗi quote được tạo ra đều phù hợp với ý tưởng riêng của bạn, mang tính cá nhân và độc đáo.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Nhanh Chóng</h3>
+                    <p class="feature-description">Chỉ trong vài giây, bạn sẽ có ngay những câu quote đầy cảm hứng cho mọi hoàn cảnh.</p>
+                </div>
+            </div>
+        </section>
+
         <!-- Footer -->
         <footer class="footer">
-            <p>&copy; 2024 Sodeep. Công cụ tạo ra những câu quote đầy cảm hứng.</p>
+            <div class="footer-content">
+                <div class="footer-main">
+                    <div class="footer-brand">
+                        <div class="brand-name">Sodeep</div>
+                        <div class="version-badge">v1.0</div>
+                    </div>
+                    <div class="footer-author">
+                        <div class="author-card">
+                            <div class="author-avatar">TBD</div>
+                            <div class="author-details">
+                                <div class="author-name">Thái Bình Dương</div>
+                                <div class="author-role">Creator & Developer</div>
+                                <a href="https://github.com/KwokPacific" class="author-link" target="_blank" rel="noopener noreferrer">
+                                    <span>🔗</span> GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 Sodeep. Công cụ tạo ra những câu quote đầy cảm hứng.</p>
+                    <p class="ai-note">Được hỗ trợ bởi công nghệ AI tiên tiến</p>
+                </div>
+            </div>
         </footer>
 
         <!-- Toast notifications -->

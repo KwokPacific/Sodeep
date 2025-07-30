@@ -26,6 +26,7 @@ class SodeepQuoteGenerator {
             outputSection: document.getElementById('outputSection'),
             quoteOutput: document.getElementById('quoteOutput'),
             copyBtn: document.getElementById('copyBtn'),
+            shareBtn: document.getElementById('shareBtn'),
             regenerateBtn: document.getElementById('regenerateBtn'),
             saveAccessCode: document.getElementById('saveAccessCode'),
             toggleAccessCode: document.getElementById('toggleAccessCode'),
@@ -79,6 +80,11 @@ class SodeepQuoteGenerator {
 
         this.elements.regenerateBtn.addEventListener('click', () => {
             this.generateQuote();
+        });
+
+        // Nút chia sẻ
+        this.elements.shareBtn.addEventListener('click', () => {
+            this.shareQuote();
         });
 
         // Lưu và hiển thị mã truy cập
@@ -308,8 +314,67 @@ Hãy chỉ trả về câu quote, không cần giải thích thêm.`;
     }
 
     /**
-     * Sao chép quote vào clipboard
+     * Chia sẻ quote
      */
+    async shareQuote() {
+        try {
+            const quoteText = this.elements.quoteOutput.textContent.trim();
+            const shareText = `${quoteText}\n\n- Tạo bởi Sodeep (Thái Bình Dương)`;
+
+            if (navigator.share) {
+                // Sử dụng Web Share API nếu có
+                await navigator.share({
+                    title: 'Quote từ Sodeep',
+                    text: shareText,
+                    url: window.location.href
+                });
+                this.showToast('Đã chia sẻ quote thành công!', 'success');
+            } else {
+                // Fallback: copy to clipboard
+                await this.copyShareText(shareText);
+            }
+        } catch (error) {
+            if (error.name !== 'AbortError') {
+                console.error('Lỗi khi chia sẻ:', error);
+                // Fallback: copy to clipboard
+                const quoteText = this.elements.quoteOutput.textContent.trim();
+                const shareText = `${quoteText}\n\n- Tạo bởi Sodeep (Thái Bình Dương)`;
+                await this.copyShareText(shareText);
+            }
+        }
+    }
+
+    /**
+     * Sao chép text để chia sẻ
+     */
+    async copyShareText(text) {
+        try {
+            await navigator.clipboard.writeText(text);
+            this.showToast('Đã sao chép quote để chia sẻ vào clipboard', 'success');
+        } catch (error) {
+            console.error('Lỗi khi sao chép:', error);
+            this.fallbackCopyShareText(text);
+        }
+    }
+
+    /**
+     * Phương thức sao chép dự phòng cho chia sẻ
+     */
+    fallbackCopyShareText(text) {
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        textArea.select();
+        
+        try {
+            document.execCommand('copy');
+            this.showToast('Đã sao chép quote để chia sẻ vào clipboard', 'success');
+        } catch (error) {
+            this.showToast('Không thể chia sẻ. Vui lòng sao chép thủ công.', 'error');
+        } finally {
+            document.body.removeChild(textArea);
+        }
+    }
     async copyToClipboard() {
         try {
             const quoteText = this.elements.quoteOutput.textContent.trim();
