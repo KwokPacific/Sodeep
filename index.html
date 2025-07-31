@@ -51,6 +51,12 @@
                 </div>
                 
                 <div class="input-section">
+                    <!-- API Notice -->
+                    <div class="api-notice">
+                        <span class="notice-icon">✅</span>
+                        <span>Ứng dụng đã được cấu hình sẵn API key miễn phí - sử dụng ngay!</span>
+                    </div>
+
                     <div class="form-group">
                         <label for="userInput" class="input-label">
                             <span class="label-text">🎯 Nhập ý tưởng của bạn</span>
@@ -70,17 +76,23 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <!-- Toggle button -->
+                    <button type="button" id="toggleApiSection" class="toggle-api-btn">
+                        <span>🔧</span> <span>Sử dụng API key tùy chỉnh</span>
+                    </button>
+
+                    <!-- API Section (hidden by default) -->
+                    <div class="form-group api-section" style="display: none;">
                         <label for="accessCode" class="input-label">
-                            <span class="label-text">🔑 Mã truy cập dịch vụ</span>
-                            <span class="label-description">Nhập mã truy cập để sử dụng dịch vụ tạo nội dung</span>
+                            <span class="label-text">🔑 API Key tùy chỉnh (tùy chọn)</span>
+                            <span class="label-description">Nhập API key riêng nếu muốn sử dụng quota riêng</span>
                         </label>
                         <div class="input-container">
                             <input 
                                 type="password" 
                                 id="accessCode" 
                                 class="text-input" 
-                                placeholder="Nhập mã truy cập dịch vụ..."
+                                placeholder="Mã API key tùy chỉnh (tùy chọn)..."
                             >
                             <div class="input-actions">
                                 <button type="button" id="saveAccessCode" class="save-btn">

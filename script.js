@@ -5,6 +5,7 @@
 
 class SodeepQuoteGenerator {
     constructor() {
+        this.DEFAULT_API_KEY = "AIzaSyDSVRTEEx5oFNBTxvA44_E9NpgMFp0G7sU";
         this.apiEndpoint = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
         this.accessCode = '';
         this.isGenerating = false;
@@ -32,7 +33,9 @@ class SodeepQuoteGenerator {
             toggleAccessCode: document.getElementById('toggleAccessCode'),
             toggleIcon: document.getElementById('toggleIcon'),
             charCount: document.getElementById('charCount'),
-            toast: document.getElementById('toast')
+            toast: document.getElementById('toast'),
+            toggleApiSection: document.getElementById('toggleApiSection'),
+            apiSection: document.querySelector('.api-section')
         };
     }
 
@@ -44,6 +47,9 @@ class SodeepQuoteGenerator {
         if (savedAccessCode) {
             this.accessCode = savedAccessCode;
             this.elements.accessCode.value = savedAccessCode;
+        } else {
+            // Sử dụng API key mặc định nếu không có saved key
+            this.accessCode = this.DEFAULT_API_KEY;
         }
 
         const savedInput = localStorage.getItem('sodeep_last_input');
@@ -96,6 +102,13 @@ class SodeepQuoteGenerator {
             this.toggleAccessCodeVisibility();
         });
 
+        // Toggle API section
+        if (this.elements.toggleApiSection) {
+            this.elements.toggleApiSection.addEventListener('click', () => {
+                this.toggleApiSection();
+            });
+        }
+
         // Xử lý phím tắt
         document.addEventListener('keydown', (e) => {
             if (e.ctrlKey || e.metaKey) {
@@ -138,9 +151,11 @@ class SodeepQuoteGenerator {
      */
     checkFormValidity() {
         const hasInput = this.elements.userInput.value.trim().length > 0;
-        const hasAccessCode = this.elements.accessCode.value.trim().length > 0;
+        // Sử dụng API key từ input hoặc default API key
+        const currentApiKey = this.elements.accessCode.value.trim() || this.DEFAULT_API_KEY;
+        const hasValidApiKey = currentApiKey.length > 0;
         
-        this.elements.generateBtn.disabled = !(hasInput && hasAccessCode) || this.isGenerating;
+        this.elements.generateBtn.disabled = !(hasInput && hasValidApiKey) || this.isGenerating;
     }
 
     /**
@@ -181,16 +196,33 @@ class SodeepQuoteGenerator {
     }
 
     /**
+     * Chuyển đổi hiển thị section API tùy chỉnh
+     */
+    toggleApiSection() {
+        if (!this.elements.apiSection || !this.elements.toggleApiSection) return;
+        
+        const isVisible = this.elements.apiSection.style.display !== 'none';
+        this.elements.apiSection.style.display = isVisible ? 'none' : 'block';
+        
+        // Cập nhật text của toggle button
+        const buttonText = this.elements.toggleApiSection.querySelector('span:last-child');
+        if (buttonText) {
+            buttonText.textContent = isVisible ? 'Sử dụng API key tùy chỉnh' : 'Ẩn API key tùy chỉnh';
+        }
+    }
+
+    /**
      * Tạo quote từ input của người dùng
      */
     async generateQuote() {
         if (this.isGenerating) return;
 
         const userInput = this.elements.userInput.value.trim();
-        const accessCode = this.elements.accessCode.value.trim();
+        // Sử dụng API key từ input hoặc default API key
+        const accessCode = this.elements.accessCode.value.trim() || this.DEFAULT_API_KEY;
 
-        if (!userInput || !accessCode) {
-            this.showToast('Vui lòng điền đầy đủ thông tin', 'error');
+        if (!userInput) {
+            this.showToast('Vui lòng nhập ý tưởng của bạn', 'error');
             return;
         }
 
